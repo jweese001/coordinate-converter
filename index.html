@@ -14,22 +14,22 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #000000;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 20px;
             color: #ffffff;
         }
 
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             background: #1a1a1a;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 30px;
             border: 1px solid #333;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(255, 215, 0, 0.15);
         }
 
         .header {
@@ -234,9 +234,122 @@
             box-shadow: 0 1px 3px rgba(255, 215, 0, 0.4);
         }
 
-        @media (max-height: 700px) {
+        /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+        /* Extra Large Screens (Desktops 1200px+) */
+        @media (min-width: 1200px) {
             .container {
+                max-width: 600px;
+                padding: 40px;
+            }
+            
+            .header h1 {
+                font-size: 28px;
+            }
+            
+            .header p {
+                font-size: 16px;
+            }
+            
+            .format-section {
+                padding: 25px;
+                padding-bottom: 60px;
+            }
+            
+            .format-label {
+                font-size: 18px;
+            }
+            
+            input[type="text"], input[type="number"] {
+                padding: 14px 16px;
+                font-size: 18px;
+            }
+            
+            .ddm-symbol-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+        }
+
+        /* Large Screens (Laptops 992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .container {
+                max-width: 550px;
+                padding: 35px;
+            }
+            
+            .header h1 {
+                font-size: 26px;
+            }
+            
+            .format-section {
+                padding: 20px;
+                padding-bottom: 55px;
+            }
+            
+            input[type="text"], input[type="number"] {
+                padding: 12px 15px;
+                font-size: 17px;
+            }
+            
+            .ddm-symbol-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
+            }
+        }
+
+        /* Medium Screens (Tablets 768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            body {
                 padding: 15px;
+            }
+            
+            .container {
+                max-width: 500px;
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .format-section {
+                margin-bottom: 18px;
+                padding: 18px;
+                padding-bottom: 50px;
+            }
+            
+            input[type="text"], input[type="number"] {
+                padding: 12px 14px;
+                font-size: 16px;
+            }
+            
+            .input-row {
+                gap: 10px;
+            }
+            
+            .separator {
+                font-size: 20px;
+            }
+            
+            .ddm-symbol-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 12px;
+            }
+        }
+
+        /* Small Screens (Large Phones 576px - 767px) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            body {
+                padding: 12px;
+            }
+            
+            .container {
+                padding: 20px;
+                border-radius: 12px;
             }
             
             .header {
@@ -244,38 +357,197 @@
             }
             
             .header h1 {
-                font-size: 20px;
+                font-size: 22px;
             }
             
             .format-section {
-                margin-bottom: 15px;
+                margin-bottom: 16px;
+                padding: 15px;
+                padding-bottom: 45px;
+            }
+            
+            input[type="text"], input[type="number"] {
+                padding: 11px 13px;
+                font-size: 15px;
+            }
+            
+            .input-row {
+                gap: 8px;
+            }
+            
+            .separator {
+                font-size: 18px;
+                margin: 0 4px;
+            }
+            
+            .ddm-symbol-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+                gap: 3px;
+            }
+            
+            .ddm-buttons {
+                gap: 3px;
+            }
+        }
+
+        /* Extra Small Screens (Phones under 576px) */
+        @media (max-width: 575px) {
+            body {
+                padding: 8px;
+                min-height: 100vh;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            .container {
+                padding: 15px;
+                border-radius: 8px;
+                max-width: 100%;
+                min-width: 280px;
+            }
+            
+            .header {
+                margin-bottom: 18px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .header p {
+                font-size: 12px;
+            }
+            
+            .format-section {
+                margin-bottom: 14px;
                 padding: 12px;
+                padding-bottom: 40px;
+                border-radius: 6px;
+            }
+            
+            .format-label {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+            
+            .input-field label {
+                font-size: 11px;
+                margin-bottom: 3px;
+            }
+            
+            input[type="text"], input[type="number"] {
+                padding: 10px 12px;
+                font-size: 14px;
+                border-radius: 4px;
+            }
+            
+            .input-row {
+                gap: 6px;
+            }
+            
+            .separator {
+                font-size: 16px;
+                margin: 0 3px;
+            }
+            
+            .example {
+                font-size: 10px;
+                margin-top: 4px;
+            }
+            
+            .ddm-buttons {
+                bottom: 8px;
+                right: 8px;
+                gap: 2px;
+            }
+            
+            .ddm-symbol-btn {
+                width: 22px;
+                height: 22px;
+                font-size: 10px;
+            }
+            
+            .buttons {
+                gap: 8px;
+                margin-top: 16px;
+            }
+            
+            .convert-btn {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .clear-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .maps-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .error {
+                font-size: 12px;
+                padding: 8px;
+                margin-top: 12px;
+            }
+        }
+
+        /* Very Small Screens (Under 350px) */
+        @media (max-width: 349px) {
+            .container {
+                padding: 10px;
+                min-width: 260px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+            }
+            
+            .format-section {
+                padding: 10px;
                 padding-bottom: 35px;
+            }
+            
+            .format-label {
+                font-size: 12px;
             }
             
             input[type="text"], input[type="number"] {
                 padding: 8px 10px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 5px;
+                font-size: 13px;
             }
             
-            .container {
-                border-radius: 8px;
-                max-width: 100%;
-            }
-
             .input-row {
+                gap: 4px;
+            }
+            
+            .separator {
+                font-size: 14px;
+                margin: 0 2px;
+            }
+            
+            .ddm-symbol-btn {
+                width: 20px;
+                height: 20px;
+                font-size: 9px;
+            }
+            
+            .ddm-buttons {
+                gap: 1px;
+            }
+            
+            .buttons {
+                flex-direction: column;
                 gap: 6px;
             }
-
-            .separator {
-                font-size: 16px;
-                margin: 0 3px;
+            
+            .maps-btn {
+                padding: 10px;
+                font-size: 13px;
             }
         }
     </style>
