@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinate Converter</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #FFD700;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        .format-section {
+            margin-bottom: 20px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 15px;
+            padding-bottom: 40px;
+            border: 1px solid #444;
+            position: relative;
+        }
+
+        .format-label {
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+        }
+
+        .input-field label {
+            display: block;
+            color: #cccccc;
+            font-size: 12px;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #444;
+            border-radius: 6px;
+            font-size: 15px;
+            background: #333;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: #404040;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+        }
+
+        input::placeholder {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .separator {
+            color: #888;
+            font-size: 18px;
+            font-weight: bold;
+            align-self: center;
+            margin: 0 5px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .convert-btn {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .convert-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .maps-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .maps-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
+        }
+
+        .clear-btn {
+            padding: 12px 20px;
+            background: #666;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .clear-btn:hover {
+            background: #888;
+        }
+
+        .error {
+            background: #4a1a1a;
+            color: #ff6b6b;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 13px;
+            border-left: 3px solid #ff4444;
+            display: none;
+        }
+
+        .example {
+            font-size: 11px;
+            color: #666;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .ddm-buttons {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .ddm-symbol-btn {
+            background: #FFD700;
+            color: #000000;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 4px rgba(255, 215, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            line-height: 1;
+        }
+
+        .ddm-symbol-btn:hover {
+            background: #FFDF00;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(255, 215, 0, 0.5);
+        }
+
+        .ddm-symbol-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 3px rgba(255, 215, 0, 0.4);
+        }
+
+        @media (max-height: 700px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                margin-bottom: 20px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .format-section {
+                margin-bottom: 15px;
+                padding: 12px;
+                padding-bottom: 35px;
+            }
+            
+            input[type="text"], input[type="number"] {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                border-radius: 8px;
+                max-width: 100%;
+            }
+
+            .input-row {
+                gap: 6px;
+            }
+
+            .separator {
+                font-size: 16px;
+                margin: 0 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Coordinate Converter</h1>
+            <p>Enter coordinates in any format</p>
+        </div>
+        
+        <!-- Decimal Degrees Section -->
+        <div class="format-section">
+            <div class="format-label">📍 Decimal Degrees</div>
+            <div class="input-row">
+                <div class="input-field">
+                    <label>Latitude</label>
+                    <input type="number" id="lat-decimal" placeholder="26.77534" step="any" onkeyup="handleDecimalInput()">
+                </div>
+                <div class="separator">,</div>
+                <div class="input-field">
+                    <label>Longitude</label>
+                    <input type="number" id="lng-decimal" placeholder="-80.0581" step="any" onkeyup="handleDecimalInput()">
+                </div>
+            </div>
+            <div class="example">Example: 26.77534, -80.0581</div>
+        </div>
+
+        <!-- DDM Format Section -->
+        <div class="format-section">
+            <div class="format-label">🧭 DDM Format</div>
+            <div class="input-row">
+                <div class="input-field">
+                    <label>Latitude DDM</label>
+                    <input type="text" id="lat-ddm" placeholder="26°46.520'N" onkeyup="handleDDMInput()" onfocus="setLastFocusedDDM(this)" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;">
+                </div>
+                <div class="separator">,</div>
+                <div class="input-field">
+                    <label>Longitude DDM</label>
+                    <input type="text" id="lng-ddm" placeholder="80°03.486'W" onkeyup="handleDDMInput()" onfocus="setLastFocusedDDM(this)" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase;">
+                </div>
+            </div>
+            <div class="example">Example: 26°46.520'N, 80°03.486'W</div>
+            <div class="ddm-buttons">
+                <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('°')">°</button>
+                <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('N')">N</button>
+                <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('S')">S</button>
+                <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('E')">E</button>
+                <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('W')">W</button>
+            </div>
+        </div>
+
+        <!-- Google Maps Section -->
+        <div class="format-section">
+            <div class="format-label">🗺️ Google Maps</div>
+            <button class="maps-btn" onclick="openInGoogleMaps()">
+                📍 Open Location in Google Maps
+            </button>
+            <div class="example">Opens current coordinates in Google Maps</div>
+        </div>
+        
+        <div class="buttons">
+            <button class="convert-btn" onclick="convertAll()">🔄 Convert</button>
+            <button class="clear-btn" onclick="clearAll()">Clear</button>
+        </div>
+        
+        <div id="error" class="error"></div>
+    </div>
+
+    <script>
+        let isUpdating = false;
+        let lastFocusedDDMField = null;
+
+        function setLastFocusedDDM(input) {
+            lastFocusedDDMField = input;
+        }
+
+        function insertSymbol(symbol) {
+            let targetInput = lastFocusedDDMField;
+            
+            if (!targetInput) {
+                targetInput = document.getElementById('lat-ddm');
+            }
+            
+            const cursorPos = targetInput.selectionStart || targetInput.value.length;
+            const value = targetInput.value;
+            const newValue = value.slice(0, cursorPos) + symbol + value.slice(cursorPos);
+            
+            targetInput.value = newValue;
+            targetInput.focus();
+            targetInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+            
+            handleDDMInput();
+        }
+
+        function handleDecimalInput() {
+            if (isUpdating) return;
+            
+            const lat = parseFloat(document.getElementById('lat-decimal').value);
+            const lng = parseFloat(document.getElementById('lng-decimal').value);
+            
+            if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+                updateOtherFormats('decimal', lat, lng);
+                clearError();
+            }
+        }
+
+        function handleDDMInput() {
+            if (isUpdating) return;
+            
+            const latDDM = document.getElementById('lat-ddm').value.trim();
+            const lngDDM = document.getElementById('lng-ddm').value.trim();
+            
+            if (latDDM && lngDDM) {
+                const coords = parseDDM(latDDM, lngDDM);
+                if (coords) {
+                    updateOtherFormats('ddm', coords.lat, coords.lng);
+                    clearError();
+                }
+            }
+        }
+
+        function parseDDM(latStr, lngStr) {
+            try {
+                const latMatch = latStr.match(/(\d+)°(\d+\.?\d*)'?([NS])/i);
+                const lngMatch = lngStr.match(/(\d+)°(\d+\.?\d*)'?([EW])/i);
+
+                if (latMatch && lngMatch) {
+                    let lat = parseInt(latMatch[1]) + parseFloat(latMatch[2]) / 60;
+                    let lng = parseInt(lngMatch[1]) + parseFloat(lngMatch[2]) / 60;
+
+                    if (latMatch[3].toUpperCase() === 'S') lat = -lat;
+                    if (lngMatch[3].toUpperCase() === 'W') lng = -lng;
+
+                    return { lat, lng };
+                }
+            } catch (e) {
+                return null;
+            }
+            return null;
+        }
+
+        function updateOtherFormats(sourceType, lat, lng) {
+            isUpdating = true;
+
+            if (sourceType !== 'decimal') {
+                document.getElementById('lat-decimal').value = lat.toFixed(6);
+                document.getElementById('lng-decimal').value = lng.toFixed(6);
+            }
+
+            if (sourceType !== 'ddm') {
+                const ddm = convertToDDM(lat, lng);
+                const ddmParts = ddm.split(', ');
+                document.getElementById('lat-ddm').value = ddmParts[0];
+                document.getElementById('lng-ddm').value = ddmParts[1];
+            }
+
+            isUpdating = false;
+        }
+
+        function convertToDDM(lat, lng) {
+            const latAbs = Math.abs(lat);
+            const latDeg = Math.floor(latAbs);
+            const latMin = (latAbs - latDeg) * 60;
+            const latDir = lat >= 0 ? 'N' : 'S';
+
+            const lngAbs = Math.abs(lng);
+            const lngDeg = Math.floor(lngAbs);
+            const lngMin = (lngAbs - lngDeg) * 60;
+            const lngDir = lng >= 0 ? 'E' : 'W';
+
+            return `${latDeg}°${latMin.toFixed(3)}'${latDir}, ${lngDeg}°${lngMin.toFixed(3)}'${lngDir}`;
+        }
+
+        function convertAll() {
+            const latDecimal = parseFloat(document.getElementById('lat-decimal').value);
+            const lngDecimal = parseFloat(document.getElementById('lng-decimal').value);
+            const latDDM = document.getElementById('lat-ddm').value.trim();
+            const lngDDM = document.getElementById('lng-ddm').value.trim();
+
+            try {
+                let lat, lng;
+
+                if (!isNaN(latDecimal) && !isNaN(lngDecimal)) {
+                    lat = latDecimal; lng = lngDecimal;
+                } else if (latDDM && lngDDM) {
+                    const coords = parseDDM(latDDM, lngDDM);
+                    if (coords) { lat = coords.lat; lng = coords.lng; }
+                }
+
+                if (lat !== undefined && lng !== undefined) {
+                    updateOtherFormats('manual', lat, lng);
+                    clearError();
+                } else {
+                    showError('Please enter valid coordinates in at least one format.');
+                }
+            } catch (e) {
+                showError('Error converting coordinates: ' + e.message);
+            }
+        }
+
+        function openInGoogleMaps() {
+            const lat = parseFloat(document.getElementById('lat-decimal').value);
+            const lng = parseFloat(document.getElementById('lng-decimal').value);
+            
+            if (isNaN(lat) || isNaN(lng)) {
+                showError('Please enter valid coordinates before opening Google Maps.');
+                return;
+            }
+            
+            if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                showError('Coordinates are out of valid range.');
+                return;
+            }
+            
+            const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}&z=15`;
+            window.open(mapsUrl, '_blank');
+            clearError();
+        }
+
+        function clearAll() {
+            document.getElementById('lat-decimal').value = '';
+            document.getElementById('lng-decimal').value = '';
+            document.getElementById('lat-ddm').value = '';
+            document.getElementById('lng-ddm').value = '';
+            
+            clearError();
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function clearError() {
+            document.getElementById('error').style.display = 'none';
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') convertAll();
+        });
+    </script>
+</body>
+</html>
